@@ -9,7 +9,8 @@ def main():
             'filename': fname,
             'passed': 0,
             'failed': 0,
-            'skipped':0
+            'skipped':0,
+            'totla': 0
         }
         try:
             parser = tap.parser.Parser()
@@ -17,6 +18,7 @@ def main():
                 if line.get('_ok') is True: fresults['passed'] += 1
                 elif line.get('_ok') is False: fresults['failed'] += 1
                 elif '_ok' in line and line.get('_ok') is None: fresults['skipped'] += 1
+                elif line.get('_expected_tests'): fresults['total'] = line.get('_expected_tests')
         except:
             pass
         finally:
